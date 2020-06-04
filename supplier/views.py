@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
-from .models import Supplier, Product
+from .models import Product
+from shop.models import Supplier
 from django.contrib import messages
 from .forms import ProductForm
 from admindashboard.models import addproductlist
@@ -15,7 +16,7 @@ def home(request, pk):
 
 def supplier_register(request):
     if (request.method == "POST"):
-
+        
         supplier=Supplier()
 
         supplier.first_name=request.POST['first_name']

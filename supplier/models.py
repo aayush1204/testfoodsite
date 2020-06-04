@@ -39,7 +39,7 @@ class Product(models.Model):
      out_of_stock = models.BooleanField(default=False)
      category = models.CharField(max_length=100)
      supplier=models.ForeignKey(Supplier, null=True, on_delete = models.SET_NULL)
-    # product_image = 
+    # product_image =
 
      def __str__(self):
          return self.product_name

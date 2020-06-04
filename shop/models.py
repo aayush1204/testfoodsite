@@ -19,7 +19,16 @@ from django.contrib.auth.models import AbstractUser
 #     product_price = models.IntegerField(default=0)
 
 
-# New MOdels    
+# New MOdels
+
+class Society(models.Model):
+    society_name=models.CharField(max_length=30)
+    society_locality=models.CharField(max_length=30)
+    society_address=models.CharField(max_length=30)
+class Voucher(models.Model):
+    voucher_code=models.CharField(max_length=10)
+    voucher_value=models.IntegerField(default=1)
+    society=models.ManyToManyField(Society)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -29,15 +38,16 @@ class Profile(models.Model):
         ('A','Admin'),
     )
     pr= models.CharField(max_length=1,choices=PR)
+    society=models.OneToOneField(Society,on_delete=models.CASCADE,null=True)
 
 
 class Supplier(models.Model):
-    
+
     supplier_details = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    phone = models.CharField(max_length=10) 
-    
+    phone = models.CharField(max_length=10)
+
     address = models.TextField(default="")
-    number = models.CharField(max_length=15)
+    # number = models.CharField(max_length=15)
     #address = models.TextField()
     pincode=models.PositiveIntegerField(default=0)
     GST_number=models.PositiveIntegerField(default=0)
@@ -61,7 +71,7 @@ class Product(models.Model):
     category = models.CharField(max_length=100)
     product_image = models.CharField(max_length=100)
     product_sku=models.IntegerField(default=1)
-    
+
 
     def __str__(self):
         return self.product_name
@@ -73,6 +83,7 @@ class Cart(models.Model):
     quantity = models.IntegerField(default=0)
     product_image = models.CharField(max_length=100)
     is_ordered = models.BooleanField(default=False)
+    refunded = models.BooleanField(default=False)
     # product_price = models.IntegerField(default=0)
 
     def __str__(self):
@@ -100,14 +111,14 @@ class Order(models.Model):
     address = models.CharField(max_length=50)
     apartmentno = models.CharField(max_length=10)
     city = models.CharField(max_length=20)
-    zipcode = models.CharField(max_length=6) 
+    zipcode = models.CharField(max_length=6)
     is_completed = models.BooleanField(default=False)
     total_amount = models.IntegerField(default=0)
     items = models.ManyToManyField(Cart)
-    is_refunded = models.BooleanField(default=False)   
-    
-    def __str__(self):
-        return self.referral_id
+    is_refunded = models.BooleanField(default=False)
+
+    # def __str__(self):
+    #     return self.referral_id
 
 class ContactUs(models.Model):
     name = models.CharField(max_length=30)
@@ -118,3 +129,8 @@ class ContactUs(models.Model):
 
     def __str__(self):
         return self.subject
+
+class Refunds(models.Model):
+    order = models.OneToOneField(Order, on_delete=models.CASCADE)
+    items = models.ManyToManyField(Cart)
+    refund_amount = models.IntegerField(default=0) 
