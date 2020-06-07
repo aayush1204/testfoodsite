@@ -82,6 +82,7 @@
                     <a class="nav-link dropdown-toggle" href="{% url 'shop' %}" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                     <a class="dropdown-item" href="{% url 'myorders' %}">My Orders</a>
+                    <a class="dropdown-item" href="{% url 'myrefunds' %}">My Refunds</a>
                     <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
                     </div>
                   </li>
@@ -150,35 +151,14 @@
                                             <p>Rs. {{i.total_amount}}</p>
                                         </th>
                                         <th><p>
-                                             <a href="#" class="btn btn-light py-2 px-3 ">Track my order</a>
+                                             <a href="{% url 'track' x=i.referral_id %}" class="btn btn-light py-2 px-3 ">Track my order</a>
                                             </p></th>
                                         <!-- <th>Total</th> -->
                                       </tr>
                                     </thead>
                                     <tbody>
                                 {%for j in i.items.all %}
-                                
-                                <!-- <tr class="text-center"> -->
-                                    <!-- <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td> -->
-<!--                                     
-                                    <td class="image-prod"><div class="img" style="background-image:url({{BaseUrl}}/{{j.product_image}});"></div></td>
-                                    
-                                    <td class="product-name">
-                                        <h3>{{j.product.product_name}}</h3>
-                                        <p>Far far away, behind the word mountains, far from the countries</p>
-                                    </td>
-                                    
-                                    <td class="price">{{j.product.product_price}}</td>
-                                    
-                                    <td class="quantity">
-                                        {{j.quantity}} -->
-                                        <!-- <div class="input-group mb-3"> -->
-                                         <!-- <input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100"> -->
-                                      <!-- </div>
-                                  </td>
-                                     -->
-                                    <!-- <td class="total">{{j.quantity}}*{{j.product.product_price}}</td> -->
-                                  <!-- </tr>   -->
+                              
                                   <tr class="text-center">
                                     <!-- <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td> -->
                                     
@@ -186,8 +166,8 @@
                                     
                                     <td class="product-name">
                                         <h3>{{j.product.product_name}}</h3>
-                                        <p>Sold by-{{j.product.supplier.supplier_name}}   
-                                             
+                                        <p>Sold by-{{j.product.supplier.store_name}}   
+              
                                         </p>
                                         
                                     </td>
@@ -199,7 +179,7 @@
                                     
                                     <td class="quantity ">
                                     
-                                        <a href="#" class="btn btn-primary ">Return</a>
+                                        <a href="{% url 'refund' x=i.referral_id %}" class="btn btn-primary ">Return</a>
                                         
                                         <!-- {{j.quantity}} -->
                                         <!-- <div class="input-group mb-3"> -->
