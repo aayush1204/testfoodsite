@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 import requests
 from .forms import loginform
-from supplier.models import Product
+from shop.models import Product
 from shop.models import Supplier,Voucher,Society
 from django.contrib.auth.models import User
 from django.http import HttpResponse

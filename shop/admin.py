@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 # Register your models here.
 
-from .models import Product ,Supplier, Cart, Address , Order , ContactUs, Profile,Refunds
+from .models import Product ,Supplier, Cart, Address , Order , ContactUs, Profile, Society, Refunds
 
 admin.site.register(Supplier)
 admin.site.register(Product)
@@ -12,6 +12,7 @@ admin.site.register(Address)
 admin.site.register(Order)
 admin.site.register(ContactUs)
 admin.site.register(Refunds)
+admin.site.register(Society)
 
 admin.site.register(Profile)
 

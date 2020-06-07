@@ -21,7 +21,7 @@ urlpatterns = [
     path('updatevoucher/',views.updatevoucher,name='updatevoucher'),
     path('deletevoucher/',views.deletevoucher,name='deletevoucher'),
 
-    # path('/supplierslist',views.supplierslist,name='supplierslist'),
+    path('/supplierslist',views.supplierslist,name='supplierslist'),
     path('logout/',views.logout,name='logout'),
 
     # path('home/',views.homepage,name='homepage'),
